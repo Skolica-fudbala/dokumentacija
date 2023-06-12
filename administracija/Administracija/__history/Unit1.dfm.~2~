@@ -1,0 +1,17 @@
+object DM: TDM
+  Height = 480
+  Width = 640
+  object Conn: TFDConnection
+    Params.Strings = (
+      'Database=C:\Users\Veljko\Desktop\administracija.db3'
+      'DriverID=SQLite')
+    Connected = True
+    Left = 136
+    Top = 112
+  end
+  object FDQuery1: TFDQuery
+    Connection = Conn
+    Left = 216
+    Top = 120
+  end
+end

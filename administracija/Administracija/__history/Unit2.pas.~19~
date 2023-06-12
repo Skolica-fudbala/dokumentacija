@@ -1,0 +1,113 @@
+﻿unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Unit1, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Unit3;
+
+type
+  TMembersForm = class(TForm)
+    pnlSearch: TPanel;
+    lbSearch: TLabel;
+    rdBtnByName: TRadioButton;
+    rdBtnByJMBG: TRadioButton;
+    edtSearchCriteria: TEdit;
+    cmdSearch: TButton;
+    pnlGrid: TPanel;
+    DBGrid1: TDBGrid;
+    dsMembers: TDataSource;
+    pnlControls: TPanel;
+    cmdClose: TButton;
+    cmdUpdate: TButton;
+    cmdCreate: TButton;
+    procedure refreshGrid();
+    procedure FormCreate(Sender: TObject);
+    procedure cmdSearchClick(Sender: TObject);
+    procedure cmdCloseClick(Sender: TObject);
+    procedure cmdUpdateClick(Sender: TObject);
+    procedure cmdCreateClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MembersForm: TMembersForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TMembersForm.cmdCloseClick(Sender: TObject);
+begin
+  self.Close;
+end;
+
+procedure TMembersForm.cmdCreateClick(Sender: TObject);
+begin
+  MemberDetailsForm.Show;
+end;
+
+procedure TMembersForm.cmdSearchClick(Sender: TObject);
+begin
+  // Check if one of two cretieras is checked.
+  if ((rdBtnByName.Checked = false) AND (rdBtnByJMBG.Checked = false)) then
+    begin
+      ShowMessage('Morate izabrati jednu od opcija za pretragu!');
+    end;
+
+    RefreshGrid;
+end;
+
+procedure TMembersForm.cmdUpdateClick(Sender: TObject);
+begin
+  MemberDetailsForm.Hint := DBGrid1.Fields[DBGrid1.SelectedIndex].AsString;
+  MemberDetailsForm.Show;
+end;
+
+procedure TMembersForm.FormCreate(Sender: TObject);
+begin
+  // Fetch members from database.
+  with DM.QryMembersSelect do
+    begin
+      active := false;
+      sql.Clear;
+      sql.Text := 'SELECT m.id, (m.firstname || " (" || p.firstname || ") " || m.lastname) AS "Ime (Srednje) Prezime",'
+        + ' m.jmbg AS "JMBG", '
+        + ' m.date_of_birth AS "Datum rođenja" '
+        + 'FROM members m INNER JOIN members_parents mp ON mp.member_id = m.id INNER JOIN parents p ON mp.parent_id = p.id';;
+      active := true;
+    end;
+end;
+
+procedure TMembersForm.refreshGrid;
+var selectQuery: string;
+begin
+  if (rdBtnByName.Checked) then
+    begin
+      // Search by name
+      selectQuery := 'SELECT m.id, (m.firstname || " (" || p.firstname || ") " || m.lastname) AS "Ime (Srednje) Prezime"' +
+        ',p.jmbg AS "JMBG", m.date_of_birth AS "Datum rođenja"' +
+        ' FROM members m INNER JOIN members_parents mp ON mp.member_id = m.id INNER JOIN parents p ON mp.parent_id = p.id WHERE "Ime (Srednje) Prezime" LIKE ' + quotedstr('%' + edtSearchCriteria.Text + '%');
+    end
+  else if (rdBtnByJMBG.Checked) then
+    begin
+      // Search by JMBG
+      selectQuery := 'SELECT m.id, (m.firstname || " (" || p.firstname || ") " || m.lastname) AS "Ime (Srednje) Prezime"' +
+        ',m.jmbg AS "JMBG", m.date_of_birth AS "Datum rođenja"' +
+        ' FROM members m INNER JOIN members_parents mp ON mp.member_id = m.id INNER JOIN parents p ON mp.parent_id = p.id WHERE m.jmbg LIKE ' + quotedstr('%' + edtSearchCriteria.Text + '%');
+    end;
+
+    with DM.QryMembersSelect do
+      begin
+        active := false;
+        sql.Clear;
+        sql.Text := selectQuery;
+        active := true;
+      end;
+end;
+
+end.

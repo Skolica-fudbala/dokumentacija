@@ -1,0 +1,16 @@
+﻿program Administracija;
+
+uses
+  Vcl.Forms,
+  Unit10 in '..\Embarcadero\Studio\Projects\Unit10.pas' {Članovi},
+  Unit1 in 'Unit1.pas' {DM: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMembers, Members);
+  Application.CreateForm(TDM, DM);
+  Application.Run;
+end.

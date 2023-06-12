@@ -1,0 +1,14 @@
+﻿program Administracija;
+
+uses
+  Vcl.Forms,
+  Unit10 in '..\Embarcadero\Studio\Projects\Unit10.pas' {Članovi};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TČlanovi, Članovi);
+  Application.Run;
+end.
