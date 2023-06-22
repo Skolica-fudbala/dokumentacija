@@ -4,3 +4,4 @@
 11.06.2022 dodao predlog rešenja.
 12.06.2022 ipsravio gramatičke greške u opisu procesa nabavke.
 
+22.06.2023 Dodao aplikaciju
