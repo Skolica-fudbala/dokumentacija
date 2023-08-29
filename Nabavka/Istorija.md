@@ -5,3 +5,4 @@
 12.06.2022 ipsravio gramatičke greške u opisu procesa nabavke.
 21.06.2023 Dodao MOV
 22.06.2023 Dodao aplikaciju
+29.08.2023 Izmena applikacije, prikaz narudzbenica po id-u narudzbenice.
