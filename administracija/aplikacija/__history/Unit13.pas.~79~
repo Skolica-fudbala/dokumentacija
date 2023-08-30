@@ -1,0 +1,223 @@
+unit Unit13;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, Vcl.StdCtrls,
+  Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.Grids, Vcl.DBGrids, Vcl.DBCGrids, Vcl.ComCtrls, Vcl.Tabs, Vcl.Menus,
+  Unit14, Unit15, Unit1;
+
+type
+  TformClanovi = class(TForm)
+    DBEdit1: TDBEdit;
+    dsClanovi: TDataSource;
+    DBNavigator1: TDBNavigator;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBGrid1: TDBGrid;
+    dtRoditelj: TDataSource;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Tabela: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    cmdZatvori: TButton;
+    menu: TMainMenu;
+    Clanovi1: TMenuItem;
+    Roditelji: TMenuItem;
+    Panel2: TPanel;
+    Forma1: TMenuItem;
+    Forma2: TMenuItem;
+    lbSearch: TLabel;
+    rdBtnPoImenu: TRadioButton;
+    rdBtnPoJMBG: TRadioButton;
+    edtSearchCriteria: TEdit;
+    cmdPretrazi: TButton;
+    cmdResetFilter: TButton;
+    DBCheckBox1: TDBCheckBox;
+    Roditelj: TLabel;
+    Label6: TLabel;
+    edtId: TDBEdit;
+    Label5: TLabel;
+    edtIme: TDBEdit;
+    edtPrezime: TDBEdit;
+    Label7: TLabel;
+    edtJMBG: TDBEdit;
+    Label8: TLabel;
+    edtBrTelefona: TDBEdit;
+    Label9: TLabel;
+    Label10: TLabel;
+    da: TDBEdit;
+    edtClanId: TDBEdit;
+    Label11: TLabel;
+    reneri1: TMenuItem;
+    Forma3: TMenuItem;
+    dsTipoviRoditelja: TDataSource;
+    cbTipoviRoditelja: TComboBox;
+    procedure cmdZatvoriClick(Sender: TObject);
+    procedure Forma2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
+    procedure cmdPretraziClick(Sender: TObject);
+    procedure cmdResetFilterClick(Sender: TObject);
+    procedure Forma3Click(Sender: TObject);
+    procedure osveziComboBoxSaTipovimaRoditelja();
+    procedure cbTipoviRoditeljaChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formClanovi: TformClanovi;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TformClanovi.cbTipoviRoditeljaChange(Sender: TObject);
+begin
+  with DM.qryRoditeljaZaDete do
+    begin
+      Active := false;
+      Sql.Clear;
+      sql.Text := 'SELECT *' +
+        'FROM roditelji r ' +
+        'INNER JOIN clanovi_roditelji cr ON cr.roditelj_id = r.id ' +
+        'WHERE cr.clan_id = ' + edtClanId.Text + ' AND roditelj_id = ' + intToStr(NativeInt(cbTipoviRoditelja.Items.Objects[cbTipoviRoditelja.ItemIndex]));
+      Active := true;
+    end;
+end;
+
+procedure TformClanovi.cmdPretraziClick(Sender: TObject);
+begin
+  if (rdBtnPoImenu.Checked) then
+    begin
+      with DM.qryClanovi do
+        begin
+          Active := false;
+          Sql.Clear;
+          Sql.Text := 'SELECT * FROM clanovi WHERE ime LIKE ' + quotedstr('%' + edtSearchCriteria.Text + '%') + ' OR prezime LIKE ' + quotedstr('%' + edtSearchCriteria.Text + '%');
+          Active := true;
+        end;
+    end
+    else if (rdBtnPoJMBG.Checked) then
+     begin
+      with DM.qryClanovi do
+        begin
+          Active := false;
+          Sql.Clear;
+          Sql.Text := 'SELECT * FROM clanovi WHERE jmbg LIKE ' + quotedstr('%' + edtSearchCriteria.Text + '%');
+          Active := true;
+        end;
+     end;
+end;
+
+procedure TformClanovi.cmdResetFilterClick(Sender: TObject);
+begin
+  with DM.qryClanovi do
+    begin
+      Active := false;
+      Sql.Clear;
+      Sql.Text := 'SELECT * FROM clanovi';
+      Active := true;
+    end;
+end;
+
+procedure TformClanovi.cmdZatvoriClick(Sender: TObject);
+begin
+  self.Close;
+end;
+
+var roditeljId: string;
+procedure TformClanovi.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
+begin
+  osveziComboBoxSaTipovimaRoditelja();
+
+  if (cbTipoviRoditelja.Items.Count >= 1) then
+     begin
+      roditeljId := intToStr(NativeInt(cbTipoviRoditelja.Items.Objects[cbTipoviRoditelja.ItemIndex]))
+     end;
+
+  with DM.qryRoditeljaZaDete do
+    begin
+      Active := false;
+      Sql.Clear;
+      sql.Text := 'SELECT *' +
+        'FROM roditelji r ' +
+        'INNER JOIN clanovi_roditelji cr ON cr.roditelj_id = r.id ' +
+        'WHERE cr.clan_id = ' + edtClanId.Text + ' AND cr.roditelj_id = ' + roditeljId;
+      Active := true;
+    end;
+end;
+
+procedure TformClanovi.Forma2Click(Sender: TObject);
+begin
+  formRoditelji.Show;
+end;
+
+procedure TformClanovi.Forma3Click(Sender: TObject);
+begin
+  Form1.Show;
+end;
+
+procedure TformClanovi.FormShow(Sender: TObject);
+begin
+  osveziComboBoxSaTipovimaRoditelja();
+
+  with DM.qryRoditeljaZaDete do
+    begin
+      Active := false;
+      Sql.Clear;
+      Sql.Text := 'SELECT *' +
+        'FROM roditelji r ' +
+        'INNER JOIN clanovi_roditelji cr ON cr.roditelj_id = r.id ' +
+        'WHERE cr.clan_id = ' + edtClanId.Text;
+      Active := true;
+    end;
+end;
+
+procedure TformClanovi.osveziComboBoxSaTipovimaRoditelja();
+begin
+  cbTipoviRoditelja.Items.Clear;
+  cbTipoviRoditelja.Text := '';
+
+  with DM.qryTipoviRoditeljaZaDete do
+    begin
+      Active := false;
+      Sql.Clear;
+      Sql.Text := 'SELECT DISTINCT(tip), roditelj_id ' +
+        'FROM clanovi_roditelji WHERE clan_id = ' + edtClanId.Text;
+      Active := true;
+    end;
+
+  while not DM.qryTipoviRoditeljaZaDete.Eof do
+    begin
+      cbTipoviRoditelja.Items.AddObject(
+        lowercase(DM.qryTipoviRoditeljaZaDete.FieldByName('tip').AsString),
+        TObject(DM.qryTipoviRoditeljaZaDete.FieldByName('roditelj_id').AsInteger)
+      );
+
+      DM.qryTipoviRoditeljaZaDete.Next;
+    end;
+
+  if (cbTipoviRoditelja.Items.Count >= 1) then
+    begin
+      cbTipoviRoditelja.ItemIndex := 0;
+    end;
+end;
+
+end.

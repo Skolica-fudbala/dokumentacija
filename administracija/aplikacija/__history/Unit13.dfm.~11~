@@ -1,0 +1,431 @@
+object formClanovi: TformClanovi
+  Left = 0
+  Top = 0
+  Caption = 'Clanovi'
+  ClientHeight = 578
+  ClientWidth = 804
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Menu = menu
+  Position = poDesigned
+  OnShow = FormShow
+  TextHeight = 15
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 113
+    Width = 804
+    Height = 416
+    ActivePage = TabSheet1
+    Align = alTop
+    TabOrder = 0
+    ExplicitWidth = 800
+    object TabSheet1: TTabSheet
+      Caption = 'Forma'
+      object Label1: TLabel
+        Left = 17
+        Top = 66
+        Width = 20
+        Height = 15
+        Caption = 'Ime'
+      end
+      object Label2: TLabel
+        Left = 17
+        Top = 124
+        Width = 42
+        Height = 15
+        Caption = 'Prezime'
+      end
+      object Label3: TLabel
+        Left = 17
+        Top = 180
+        Width = 30
+        Height = 15
+        Caption = 'JMBG'
+      end
+      object Label4: TLabel
+        Left = 17
+        Top = 238
+        Width = 79
+        Height = 15
+        Caption = 'Datum ro'#273'enja'
+      end
+      object Roditelj: TLabel
+        Left = 352
+        Top = 16
+        Width = 57
+        Height = 21
+        Caption = 'Roditelji'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 352
+        Top = 45
+        Width = 11
+        Height = 15
+        Caption = 'ID'
+      end
+      object Label5: TLabel
+        Left = 352
+        Top = 95
+        Width = 20
+        Height = 15
+        Caption = 'Ime'
+      end
+      object Label7: TLabel
+        Left = 352
+        Top = 153
+        Width = 42
+        Height = 15
+        Caption = 'Prezime'
+      end
+      object Label8: TLabel
+        Left = 352
+        Top = 206
+        Width = 30
+        Height = 15
+        Caption = 'JMBG'
+      end
+      object Label9: TLabel
+        Left = 352
+        Top = 262
+        Width = 67
+        Height = 15
+        Caption = 'Broj telefona'
+      end
+      object Label10: TLabel
+        Left = 352
+        Top = 312
+        Width = 66
+        Height = 15
+        Caption = 'Email adresa'
+      end
+      object Label11: TLabel
+        Left = 17
+        Top = 16
+        Width = 11
+        Height = 15
+        Caption = 'ID'
+      end
+      object DBEdit1: TDBEdit
+        Left = 17
+        Top = 145
+        Width = 240
+        Height = 23
+        DataField = 'prezime'
+        DataSource = dsClanovi
+        TabOrder = 1
+      end
+      object DBEdit2: TDBEdit
+        Left = 17
+        Top = 87
+        Width = 240
+        Height = 23
+        DataField = 'ime'
+        DataSource = dsClanovi
+        TabOrder = 0
+      end
+      object DBEdit3: TDBEdit
+        Left = 17
+        Top = 259
+        Width = 240
+        Height = 23
+        DataField = 'datum_rodjenja'
+        DataSource = dsClanovi
+        TabOrder = 3
+      end
+      object DBEdit4: TDBEdit
+        Left = 17
+        Top = 201
+        Width = 240
+        Height = 23
+        DataField = 'jmbg'
+        DataSource = dsClanovi
+        TabOrder = 2
+      end
+      object DBNavigator1: TDBNavigator
+        Left = 17
+        Top = 332
+        Width = 240
+        Height = 25
+        DataSource = dsClanovi
+        TabOrder = 4
+        OnClick = DBNavigator1Click
+      end
+      object DBCheckBox1: TDBCheckBox
+        Left = 17
+        Top = 298
+        Width = 240
+        Height = 17
+        Caption = 'Sistematski pregled'
+        DataField = 'sistematski_pregled'
+        DataSource = dsClanovi
+        TabOrder = 5
+      end
+      object edtId: TDBEdit
+        Left = 352
+        Top = 66
+        Width = 240
+        Height = 23
+        Color = clBtnFace
+        DataField = 'id'
+        DataSource = dtRoditelj
+        Enabled = False
+        TabOrder = 6
+      end
+      object edtIme: TDBEdit
+        Left = 352
+        Top = 116
+        Width = 240
+        Height = 23
+        DataField = 'ime'
+        DataSource = dtRoditelj
+        TabOrder = 7
+      end
+      object edtPrezime: TDBEdit
+        Left = 352
+        Top = 174
+        Width = 240
+        Height = 23
+        DataField = 'prezime'
+        DataSource = dtRoditelj
+        TabOrder = 8
+      end
+      object edtJMBG: TDBEdit
+        Left = 352
+        Top = 227
+        Width = 240
+        Height = 23
+        DataField = 'jmbg'
+        DataSource = dtRoditelj
+        TabOrder = 9
+      end
+      object edtBrTelefona: TDBEdit
+        Left = 352
+        Top = 283
+        Width = 240
+        Height = 23
+        DataField = 'br_telefona'
+        DataSource = dtRoditelj
+        TabOrder = 10
+      end
+      object da: TDBEdit
+        Left = 352
+        Top = 333
+        Width = 240
+        Height = 23
+        DataField = 'email'
+        DataSource = dtRoditelj
+        TabOrder = 11
+      end
+      object edtClanId: TDBEdit
+        Left = 17
+        Top = 37
+        Width = 240
+        Height = 23
+        Color = clBtnFace
+        DataField = 'id'
+        DataSource = dsClanovi
+        Enabled = False
+        TabOrder = 12
+      end
+      object cbTipoviRoditelja: TComboBox
+        Left = 432
+        Top = 18
+        Width = 145
+        Height = 23
+        TabOrder = 13
+        Text = 'cbTipoviRoditelja'
+      end
+    end
+    object Tabela: TTabSheet
+      Caption = 'Tabela'
+      ImageIndex = 1
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 796
+        Height = 386
+        Align = alClient
+        DataSource = dsClanovi
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'id'
+            Width = 32
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ime'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'prezime'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'jmbg'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'datum_rodjenja'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'sistematski_pregled'
+            Visible = True
+          end>
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 529
+    Width = 804
+    Height = 49
+    Align = alTop
+    Caption = 'Panel1'
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitWidth = 800
+    DesignSize = (
+      804
+      49)
+    object cmdZatvori: TButton
+      Left = 712
+      Top = 6
+      Width = 80
+      Height = 35
+      Anchors = [akTop, akRight]
+      Caption = 'Zatvori'
+      TabOrder = 0
+      OnClick = cmdZatvoriClick
+      ExplicitLeft = 708
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 804
+    Height = 113
+    Align = alTop
+    Caption = 'Panel2'
+    ShowCaption = False
+    TabOrder = 2
+    ExplicitWidth = 800
+    object lbSearch: TLabel
+      Left = 21
+      Top = 18
+      Width = 42
+      Height = 15
+      Caption = 'Pretra'#382'i:'
+    end
+    object rdBtnPoImenu: TRadioButton
+      Left = 21
+      Top = 39
+      Width = 137
+      Height = 17
+      Caption = 'Po imenu/prezimenu'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object rdBtnPoJMBG: TRadioButton
+      Left = 164
+      Top = 40
+      Width = 66
+      Height = 17
+      Caption = 'Po JMBG'
+      TabOrder = 1
+    end
+    object edtSearchCriteria: TEdit
+      Left = 21
+      Top = 64
+      Width = 209
+      Height = 23
+      ImeName = 'US'
+      TabOrder = 2
+      TextHint = 'Unesite krijetrijum pretrage'
+    end
+    object cmdPretrazi: TButton
+      Left = 236
+      Top = 64
+      Width = 75
+      Height = 25
+      Caption = 'Pretra'#382'i'
+      TabOrder = 3
+      OnClick = cmdPretraziClick
+    end
+    object cmdResetFilter: TButton
+      Left = 317
+      Top = 64
+      Width = 75
+      Height = 25
+      Caption = 'Resetuj filter'
+      TabOrder = 4
+      OnClick = cmdResetFilterClick
+    end
+  end
+  object dsClanovi: TDataSource
+    DataSet = DM.qryClanovi
+    Left = 712
+    Top = 16
+  end
+  object dtRoditelj: TDataSource
+    DataSet = DM.qryRoditeljaZaDete
+    Left = 648
+    Top = 24
+  end
+  object menu: TMainMenu
+    Left = 572
+    Top = 26
+    object Clanovi1: TMenuItem
+      Caption = #268'lanovi'
+      object Forma1: TMenuItem
+        Caption = 'Forma'
+      end
+    end
+    object Roditelji: TMenuItem
+      Caption = 'Roditelji'
+      object Forma2: TMenuItem
+        Caption = 'Forma'
+        OnClick = Forma2Click
+      end
+    end
+    object reneri1: TMenuItem
+      Caption = 'Treneri'
+      object Forma3: TMenuItem
+        Caption = 'Forma'
+        OnClick = Forma3Click
+      end
+    end
+  end
+  object dsTipoviRoditelja: TDataSource
+    DataSet = DM.qryTipoviRoditeljaZaDete
+    Left = 496
+    Top = 56
+  end
+end
