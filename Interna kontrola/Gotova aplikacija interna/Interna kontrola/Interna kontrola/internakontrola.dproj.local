@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/09/02 13:58:54.000.221,=C:\Users\risto\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/09/02 13:59:36.000.751,C:\Users\risto\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\FAKS\Interna kontrola\pocetna.pas</Transaction>
+    <Transaction>2023/09/02 13:59:36.000.751,C:\Users\risto\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\FAKS\Interna kontrola\pocetna.fmx</Transaction>
+    <Transaction>2023/09/02 13:59:56.000.200,C:\Users\risto\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\FAKS\Interna kontrola\internakontrola.dproj</Transaction>
+    <Transaction>2023/09/02 14:03:53.000.816,=C:\FAKS\Interna kontrola\Unit2.pas</Transaction>
+    <Transaction>2023/09/02 14:04:31.000.886,C:\FAKS\Interna kontrola\Unit2.pas=C:\FAKS\Interna kontrola\kontrola.pas</Transaction>
+    <Transaction>2023/09/02 14:04:31.000.886,C:\FAKS\Interna kontrola\Unit2.fmx=C:\FAKS\Interna kontrola\kontrola.fmx</Transaction>
+    <Transaction>2023/09/02 14:04:40.000.714,=C:\FAKS\Interna kontrola\Unit3.pas</Transaction>
+    <Transaction>2023/09/02 14:04:55.000.765,C:\FAKS\Interna kontrola\Unit3.pas=C:\FAKS\Interna kontrola\odgovori.pas</Transaction>
+    <Transaction>2023/09/02 14:04:55.000.765,C:\FAKS\Interna kontrola\Unit3.fmx=C:\FAKS\Interna kontrola\odgovori.fmx</Transaction>
+    <Transaction>2023/09/02 14:30:24.000.033,=C:\FAKS\Interna kontrola\Unit4.pas</Transaction>
+    <Transaction>2023/09/02 14:30:35.000.880,C:\FAKS\Interna kontrola\Unit4.pas=C:\FAKS\Interna kontrola\db.pas</Transaction>
+    <Transaction>2023/09/02 14:30:35.000.880,C:\FAKS\Interna kontrola\Unit4.fmx=C:\FAKS\Interna kontrola\db.fmx</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
